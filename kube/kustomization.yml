@@ -1,0 +1,4 @@
+resources:
+  - overlays/dev
+
+namePrefix: svelte-

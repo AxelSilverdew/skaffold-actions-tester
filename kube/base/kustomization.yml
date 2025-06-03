@@ -1,0 +1,4 @@
+resources:
+  - ./client-cluster-ip.k8s.yml
+  - ./client-deployment.k8s.yml
+  - ./ingress-service.k8s.yml

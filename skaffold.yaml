@@ -1,0 +1,31 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: sveltekit-skaffold
+build:
+  artifacts:
+    - image: my-sveltekit-app
+      docker:
+        dockerfile: Dockerfile
+    - image: my-sveltekit-app-test
+      docker:
+        dockerfile: Dockerfile.test
+test:
+  - image: my-sveltekit-app-test
+    custom:
+      - command: npx playwright test
+manifests:
+  kustomize:
+    paths:
+      - kube/overlays/dev
+profiles:
+  - name: kube
+    manifests:
+      kustomize:
+        paths:
+          - kube
+  - name: base
+    manifests:
+      kustomize:
+        paths:
+          - kube/base

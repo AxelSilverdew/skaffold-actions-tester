@@ -1,0 +1,9 @@
+resources:
+  - ../../base
+
+namePrefix: dev-
+# patches:
+#   - target:
+#       kind: Ingress
+#       name: ingress-service
+#     path: ./ingress-service.k8s.yml
