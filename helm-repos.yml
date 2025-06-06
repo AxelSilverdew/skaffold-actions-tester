@@ -1,0 +1,7 @@
+apiVersion: v2
+
+repositories:
+  - name: stable
+    url: https://kubernetes-charts.storage.googleapis.com
+  - name: cnpg
+    url: https://cloudnative-pg.github.io/charts

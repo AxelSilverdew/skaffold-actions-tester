@@ -1,0 +1,34 @@
+name: Skaffold Workflow
+on: push
+jobs:
+  skaffold:
+    name: Run Skaffold CI
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+
+      - name: Start Minikube
+        id: minikube
+        uses: hiberbee/github-action-minikube@latest
+        with:
+          profile: github
+
+      - name: Setup Helm
+        uses: hiberbee/github-action-helm@latest
+
+      - name: Install Helm Repos
+        uses: hiberbee/github-action-helm@latest
+        with:
+          helm: repo list
+          repository-config: ./helm-repos.yml
+
+      - name: Skaffold Build
+        uses: hiberbee/github-action-skaffold@latest
+        with:
+          command: build
+
+      - name: Skaffold Test
+        uses: hiberbee/github-action-skaffold@latest
+        with:
+          command: test
