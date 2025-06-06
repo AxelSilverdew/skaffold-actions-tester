@@ -23,12 +23,14 @@ jobs:
           helm: repo list
           repository-config: ./helm-repos.yml
 
+      - name: Install Skaffold
+        run: |
+          curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64
+          chmod +x skaffold
+          sudo install skaffold /usr/local/bin/
+
       - name: Skaffold Build
-        uses: hiberbee/github-action-skaffold@latest
-        with:
-          command: build
+        run: skaffold build --file-output build.json
 
       - name: Skaffold Test
-        uses: hiberbee/github-action-skaffold@latest
-        with:
-          command: test
+        run: skaffold test --build-artifacts build.json
